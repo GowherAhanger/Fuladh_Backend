@@ -2,6 +2,7 @@ package com.gowher.Fuladh.Services;
 
 import com.gowher.Fuladh.Models.User;
 import com.gowher.Fuladh.Repositories.UserRepo;
+import com.gowher.Utils.JwtUtil;
 
 import java.util.List;
 //import java.util.NoSuchElementException;
@@ -42,9 +43,21 @@ public class UserService {
                 return user;
     }
     public User deleteUser(int id) {
-        Optional<User> userToDelete = userRepo.findById(id);
+        
         userRepo.deleteById(id);
         return new User();
+    }
+
+    public String login(String name, String password) {
+            User user = userRepo.findByNameAndPassword(name,password);
+        if(user!=null)
+        {
+            JwtUtil  jwtUtil = new JwtUtil();
+            String token = jwtUtil.generateToken(user.getName()); 
+            return token;
+        }
+        return "Invalid Credentails";
+        
     }
     
     
