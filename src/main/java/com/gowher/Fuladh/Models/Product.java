@@ -21,8 +21,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String discription;
+    private String description;
     private int price;
+    private String imageUrl;
    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="category_id")

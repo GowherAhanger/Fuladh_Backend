@@ -2,7 +2,7 @@ package com.gowher.Fuladh.Services;
 
 import com.gowher.Fuladh.Models.User;
 import com.gowher.Fuladh.Repositories.UserRepo;
-import com.gowher.Utils.JwtUtil;
+import com.gowher.Fuladh.Utils.JwtUtil;
 
 import java.util.List;
 //import java.util.NoSuchElementException;
@@ -53,7 +53,7 @@ public class UserService {
         if(user!=null)
         {
             JwtUtil  jwtUtil = new JwtUtil();
-            String token = jwtUtil.generateToken(user.getName()); 
+            String token = jwtUtil.generateToken(user);
             return token;
         }
         return "Invalid Credentails";

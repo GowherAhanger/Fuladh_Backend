@@ -7,4 +7,5 @@ import com.gowher.Fuladh.Models.User;
 public interface UserRepo extends JpaRepository<User, Integer> {
     User findByNameAndPassword(String name, String password);
 
+    User findByEmailId(String emailId);
 }
