@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gowher.Fuladh.Models.User;
 import com.gowher.Fuladh.Services.UserService;
 //import com.gowher.Utils.JwtUtil;
-import com.gowher.Utils.JwtUtil;
+import com.gowher.Fuladh.Utils.JwtUtil;
 
 import java.util.List;
 
@@ -39,34 +39,32 @@ public class UserController {
   //Add user works but goes to no go zone
   @PostMapping("/addUser")
   public User addUser(@RequestBody User user) {
-     return userService.addUser(user);
+    return userService.addUser(user);
   }
 
   @PutMapping("/updateUser")
-  public User updateUser(@RequestParam int id,@RequestBody User user) {
-      return userService.updateUser(id,user);
+  public User updateUser(@RequestParam int id, @RequestBody User user) {
+    return userService.updateUser(id, user);
   }
 
   @DeleteMapping("/deleteUser")
   public User deletUser(@RequestParam int id) {
-      return userService.deleteUser(id);
+    return userService.deleteUser(id);
   }
 
-  @GetMapping("/generateToken")
-  public String generateToken(@RequestParam String username) {
-  {
-    JwtUtil  jwtUtil = new JwtUtil();
-    String token = jwtUtil.generateToken(username); 
-    return token;
-  }
-}
+//  @GetMapping("/generateToken")
+//  public String generateToken(@RequestParam String user) {
+//  {
+//    JwtUtil  jwtUtil = new JwtUtil();
+//    String token = jwtUtil.generateToken(username);
+//    return token;
+//  }
+//}
 
-@PostMapping("/login")
-public String login(@RequestParam String name , @RequestParam  String password)
-{
+  @PostMapping("/login")
+  public String login(@RequestParam String name, @RequestParam String password) {
     return userService.login(name, password);
-}
-  
+  }
 
 }
 
