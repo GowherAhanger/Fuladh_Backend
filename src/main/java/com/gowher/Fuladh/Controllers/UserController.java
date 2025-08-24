@@ -61,10 +61,10 @@ public class UserController {
 //  }
 //}
 
-  @PostMapping("/login")
-  public String login(@RequestParam String name, @RequestParam String password) {
-    return userService.login(name, password);
-  }
+//  @PostMapping("/login")
+//  public String login(@RequestParam String name, @RequestParam String password) {
+//    return userService.login(name, password);
+//  }
 
 }
 

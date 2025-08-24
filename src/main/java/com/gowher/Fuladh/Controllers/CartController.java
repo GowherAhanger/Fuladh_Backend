@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.gowher.Fuladh.DTOs.CartItemDTO;
 import com.gowher.Fuladh.Models.CartItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,26 @@ public ResponseEntity<Map<String, String>> addToCart(
 
     return ResponseEntity.ok(response);
 }
+    @GetMapping("/items")
+    public ResponseEntity<List<CartItemDTO>> getCartItems(@RequestParam Long userId) {
+        List<CartItemDTO> items = cartService.getCartItemsByUserId(userId);
+        return ResponseEntity.ok(items);
+    }
+
+
+    @DeleteMapping("/deleteCartItem")
+    public ResponseEntity<?> deleteCartItem(@RequestParam int id) {
+        try {
+            return ResponseEntity.ok( cartService.deleteCartItemById(id));
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(404).body(ex.getMessage());
+        }
+    }
+
+
+
+
+
 
 }
 
