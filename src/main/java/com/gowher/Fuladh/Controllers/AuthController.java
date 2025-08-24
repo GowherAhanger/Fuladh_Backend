@@ -2,6 +2,7 @@ package com.gowher.Fuladh.Controllers;
 
 
 import com.gowher.Fuladh.DTOs.RegisterDTO;
+import com.gowher.Fuladh.Repositories.UserRepo;
 import com.gowher.Fuladh.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import com.gowher.Fuladh.Models.User;
 import com.gowher.Fuladh.Utils.JwtUtil;
 
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 //@CrossOrigin(origins = "http://localhost:4200")
@@ -24,6 +26,8 @@ import java.util.Map;
 public class AuthController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserRepo userRepo;
 
     private final AuthenticationManager authenticationManager;
 
@@ -42,12 +46,14 @@ public class AuthController {
             Authentication authentication =
                     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmailId(), loginDTO.getPassword()));
             String email = authentication.getName();
-            User user = new User();
+            User user = userRepo.findByEmailId(loginDTO.getEmailId());
             user.setEmailId(email);
             String token = jwtUtil.generateToken(user);
             User userRes = new User();
             userRes.setEmailId(email);
             userRes.setToken(token);
+            userRes.setId(user.getId());
+
 
             return ResponseEntity.ok(userRes);
 

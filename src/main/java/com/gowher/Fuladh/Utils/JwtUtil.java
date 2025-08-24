@@ -38,6 +38,7 @@ public class JwtUtil {
         Date tokenCreateTime = new Date();
         Date tokenValidity = new Date(tokenCreateTime.getTime() + TimeUnit.MINUTES.toMillis(accessTokenValidity));
         return Jwts.builder()
+                .claim("userId", user.getId())
                 .setClaims(claims)
                 .setExpiration(tokenValidity)
                 .signWith(SECRET_KEY)
